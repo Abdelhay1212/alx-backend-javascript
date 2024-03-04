@@ -1,16 +1,12 @@
 /* eslint-disable linebreak-style */
-const readline = require('readline');
+console.log('Welcome to Holberton School, what is your name?');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-rl.question('Welcome to Holberton School, what is your name?\n', (name) => {
+process.stdin.on('data', (name) => {
   console.log(`Your name is: ${name}`);
-});
-
-rl.on('SIGINT', () => {
   console.log('This important software is now closing');
   process.exit();
+});
+
+process.on('exit', () => {
+  console.log('This important software is now closing');
 });
