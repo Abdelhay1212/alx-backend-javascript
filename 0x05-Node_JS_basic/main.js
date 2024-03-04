@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
+const countStudents = require('./2-read_file');
 
-const displayMessage = require('./0-console');
-
-displayMessage('Hello NodeJS!');
+countStudents('database.csv');
