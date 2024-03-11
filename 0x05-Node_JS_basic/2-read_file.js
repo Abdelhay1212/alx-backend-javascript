@@ -1,47 +1,33 @@
 const fs = require('fs');
 
 function countStudents(path) {
-  try {
-    const data = fs.readFileSync(path, { encoding: 'utf-8' });
-    const lines = data.split('\n');
-    const listOfStudents = {};
-
-    console.log(`Number of students: ${lines.length - 1}`);
-
-    let firstNameIndex;
-    let fieldIndex;
-
-    const fieldNames = lines[0].split(',');
-    fieldNames.forEach((key, index) => {
-      if (key === 'firstname') {
-        firstNameIndex = index;
-      }
-      if (key === 'field') {
-        fieldIndex = index;
-      }
-    });
-
-    for (const line of lines.slice(1, lines.length)) {
-      const cols = line.split(',');
-      const key = cols[fieldIndex];
-
-      if (key in listOfStudents) {
-        listOfStudents[key].push(cols[firstNameIndex]);
-      } else {
-        listOfStudents[key] = [cols[firstNameIndex]];
-      }
-    }
-
-    for (const key in listOfStudents) {
-      if (key in listOfStudents) {
-        const len = listOfStudents[key].length;
-        const list = listOfStudents[key].join(', ');
-        console.log(`Number of students in ${key}: ${len}. List: ${list}`);
-      }
-    }
-  } catch (error) {
-    console.error(error);
+  if (!fs.existsSync(path)) {
     throw new Error('Cannot load the database');
+  }
+
+  const data = fs.readFileSync(path, 'utf8');
+  const lines = data.split('\n');
+  const hashtable = {};
+  let students = -1;
+  for (const line of lines) {
+    if (line.trim() !== '') {
+      const columns = line.split(',');
+      const field = columns[3];
+      const firstname = columns[0];
+      if (students >= 0) {
+        if (!Object.hasOwnProperty.call(hashtable, field)) {
+          hashtable[field] = [];
+        }
+        hashtable[field] = [...hashtable[field], firstname];
+      }
+      students += 1;
+    }
+  }
+  console.log(`Number of students: ${students}`);
+  for (const key in hashtable) {
+    if (Object.hasOwnProperty.call(hashtable, key)) {
+      console.log(`Number of students in ${key}: ${hashtable[key].length}. List: ${hashtable[key].join(', ')}`);
+    }
   }
 }
 
