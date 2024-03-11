@@ -22,13 +22,13 @@ function countStudents(path) {
             students += 1;
           }
         }
-        console.log(`Number of students: ${students}`);
+        let output = `Number of students: ${students}\n`;
         for (const key in hashtable) {
           if (Object.hasOwnProperty.call(hashtable, key)) {
-            console.log(`Number of students in ${key}: ${hashtable[key].length}. List: ${hashtable[key].join(', ')}`);
+            output += `Number of students in ${key}: ${hashtable[key].length}. List: ${hashtable[key].join(', ')}\n`;
           }
         }
-        resolve();
+        resolve(output);
       })
       .catch(() => {
         reject(new Error('Cannot load the database'));
@@ -40,13 +40,14 @@ const app = http.createServer((req, res) => {
   if (req.url === '/') {
     res.writeHead(200);
     res.end('Hello Holberton School!');
-  }
-
-  if (req.url === '/students') {
+  } else if (req.url === '/students') {
     countStudents(process.argv[2])
       .then((data) => {
         res.writeHead(200);
         res.end(`This is the list of our students\n${data}`);
+      }).catch((error) => {
+        res.writeHead(404);
+        res.end(error.message);
       });
   }
 });
