@@ -17,7 +17,7 @@ function readDatabase(path) {
         });
         resolve(studentsPerField);
       }).catch(() => {
-        reject(new Error('Cannot load the database'));
+        reject(Error('Cannot load the database'));
       });
   });
 }
