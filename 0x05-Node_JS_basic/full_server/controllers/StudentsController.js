@@ -8,7 +8,7 @@ class StudentsController {
         Object.keys(data).forEach((field) => {
           response += `Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}\n`;
         });
-        res.status(200).send(response);
+        res.status(200).send(response.slice(0, response.length - 1));
       }).catch((err) => {
         res.status(500).send(`Cannot load the database - ${err.message}`);
       });
