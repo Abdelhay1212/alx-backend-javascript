@@ -9,7 +9,7 @@ class StudentsController {
           response += `Number of students in ${field}: ${data[field].length}. `
             + `List: ${data[field].join(', ')}\n`;
         });
-        res.status(200).send(response.slice(0, response.length - 1));
+        return res.status(200).send(response.slice(0, response.length - 1));
       }).catch((err) => {
         res.status(500).send(`Cannot load the database - ${err.message}`);
       });
@@ -17,14 +17,14 @@ class StudentsController {
 
   static getAllStudentsByMajor(req, res) {
     if (!['CS', 'SWE'].includes(req.params.major)) {
-      res.status(500).send('Major parameter must be CS or SWE');
+      return res.status(500).send('Major parameter must be CS or SWE');
     }
-    readDatabase(process.argv[2])
+    return readDatabase(process.argv[2])
       .then((data) => {
         if (!data[req.params.major]) {
-          res.status(500).send('Cannot load the database');
+          return res.status(500).send('Cannot load the database');
         }
-        res.status(200).send(`List: ${data[req.params.major].join(', ')}`);
+        return res.status(200).send(`List: ${data[req.params.major].join(', ')}`);
       }).catch((err) => {
         res.status(500).send(`Cannot load the database - ${err.message}`);
       });
