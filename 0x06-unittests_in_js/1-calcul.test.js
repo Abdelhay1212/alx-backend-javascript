@@ -13,7 +13,7 @@ describe('calculateNumber', () => {
     assert.strictEqual(calculateNumber('SUBTRACT', 1, 3), 2);
     assert.strictEqual(calculateNumber('SUBTRACT', 2.8, 3), 0);
     assert.strictEqual(calculateNumber('SUBTRACT', 1, 2.2), 1);
-    assert.strictEqual(calculateNumber('SUBTRACT', 1.4, 4.5), -4);
+    assert.strictEqual(calculateNumber('SUBTRACT', 1.4, 4.5), 4);
   });
 
   it('divides two rounded numbers', () => {
