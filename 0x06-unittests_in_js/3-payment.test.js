@@ -1,15 +1,12 @@
 const sinon = require('sinon');
-const Utils = require('./utils');
-const sendPaymentRequestToApi = require('./3-payment');
+const sendPaymentRequestToApi = require('./3-payment.js');
+const Utils = require('./utils.js');
 
-describe('sendPaymentRequestToApi', () => {
-  it('should use Utils.calculateNumber', () => {
-    // create a spy on the function Utils.calculateNumber
-    const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
-    // call the function under the test
+describe('sendPaymentRequestToApi', function () {
+  it('should use Utils.calculateNumber', function () {
+    const spy = sinon.spy(Utils, 'calculateNumber');
     sendPaymentRequestToApi(100, 20);
-    // Assert that Utils.calculateNumber was called once with the correct arguments
-    sinon.assert.calledWith(calculateNumberSpy, 'SUM', 100, 20);
-    calculateNumberSpy.restore();
+    sinon.assert.calledWith(spy, 'SUM', 100, 20);
+    spy.restore();
   });
 });
