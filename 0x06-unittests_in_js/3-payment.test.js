@@ -1,10 +1,11 @@
 const sinon = require('sinon');
 const Utils = require('./utils');
-const expect = require('chai').expect;
+const chai = require('chai');
 const sendPaymentRequestToApi = require('./3-payment');
 
+const expect = chai.expect;
 describe('sendPaymentRequestToApi', () => {
-  describe('validates the usage of the Utils.calculateNumber function', () => {
+  it('validates the usage of the Utils.calculateNumber function', () => {
     // create a spy on the function Utils.calculateNumber
     const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
     // call the function under the test
