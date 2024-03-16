@@ -10,10 +10,10 @@ describe('calculateNumber', () => {
   });
 
   it('subtracts two rounded numbers', () => {
-    assert.strictEqual(calculateNumber('SUBTRACT', 1, 3), 2);
-    assert.strictEqual(calculateNumber('SUBTRACT', 2.8, 3), 0);
-    assert.strictEqual(calculateNumber('SUBTRACT', 1, 2.2), 1);
-    assert.strictEqual(calculateNumber('SUBTRACT', 1.4, 4.5), 4);
+    assert.strictEqual(calculateNumber('SUBTRACT', 3, 1), 2);
+    assert.strictEqual(calculateNumber('SUBTRACT', 3, 2.8), 0);
+    assert.strictEqual(calculateNumber('SUBTRACT', 2.2, 1), 1);
+    assert.strictEqual(calculateNumber('SUBTRACT', 1.4, 4.5), -4);
   });
 
   it('divides two rounded numbers', () => {
